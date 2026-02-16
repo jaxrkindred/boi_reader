@@ -1,36 +1,87 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# BOI Reader
 
-## Getting Started
+A web app for tracking your reading progress through **The Beginning of Infinity** by David Deutsch, with curated companion resources and an AI chat companion.
 
-First, run the development server:
+## Features
+
+- **Reading Progress Tracking** — Mark chapters as not started, reading, or completed
+- **Companion Resources** — ToKCast episodes by Brett Hall and other curated materials per chapter
+- **AI Reading Companion** — Chat with an AI that embodies Deutsch's thinking style (powered by Claude)
+- **Warm, Bookish Design** — Serif headings, earth tones, generous whitespace
+
+## Tech Stack
+
+- **Next.js** (App Router) + TypeScript
+- **Supabase** (Auth + PostgreSQL database)
+- **Claude API** (AI chat companion)
+- **Tailwind CSS** (warm/bookish theme)
+
+## Setup
+
+### 1. Clone and install
+
+```bash
+git clone <repo-url>
+cd boi_reader
+npm install
+```
+
+### 2. Set up Supabase
+
+1. Create a new project at [supabase.com](https://supabase.com)
+2. Go to the SQL Editor and run the contents of `supabase/schema.sql`
+3. Enable Google OAuth in Authentication → Providers (optional)
+4. Copy your project URL and anon key from Settings → API
+
+### 3. Configure environment
+
+```bash
+cp .env.local.example .env.local
+```
+
+Fill in your Supabase and Anthropic API credentials.
+
+### 4. Run locally
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+src/
+  app/
+    page.tsx                    — Dashboard with chapter grid
+    layout.tsx                  — Root layout with fonts
+    login/page.tsx              — Auth page
+    auth/callback/route.ts      — OAuth callback
+    chapters/[slug]/page.tsx    — Individual chapter page
+    api/chat/route.ts           — AI chat endpoint
+  components/
+    Header.tsx                  — Site header
+    ProgressBar.tsx             — Overall reading progress
+    ChapterCard.tsx             — Chapter card for dashboard
+    ResourceSection.tsx         — Collapsible resource panels
+    ChatPanel.tsx               — AI companion chat panel
+    StatusToggle.tsx            — Reading status toggle
+  lib/
+    chapters.ts                 — Chapter metadata (18 chapters)
+    types.ts                    — TypeScript types
+    supabase/
+      client.ts                 — Browser Supabase client
+      server.ts                 — Server Supabase client
+      middleware.ts             — Auth middleware
+supabase/
+  schema.sql                    — Database schema
+```
 
-## Learn More
+## TODO
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [ ] Fill in exact ToKCast episode URLs per chapter
+- [ ] Add more curated resources per chapter
+- [ ] User notes feature
+- [ ] Conversation summarization for AI memory
+- [ ] Deploy to Vercel
