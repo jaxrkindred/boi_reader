@@ -241,11 +241,18 @@ export const chapters: Chapter[] = [
     resources: [
       {
         type: 'podcast',
-        title: 'ToKCast: Chapter 10 — A Dream of Socrates',
-        url: 'https://www.bretthall.org/10---a-dream-of-socrates.html',
+        title: 'ToKCast: Chapter 10 — A Dream of Socrates: Part 1',
+        url: 'https://www.youtube.com/watch?v=Wi42A_NrW98&t=1610s',
         source: 'ToKCast by Brett Hall',
         description:
           'Deutsch\'s imaginative dialogue exploring epistemology through Socrates.',
+      },
+      {
+        type: 'podcast',
+        title: 'ToKCast: Chapter 10 - A Dream of Socrates: Part 2',
+        url: 'https://www.youtube.com/watch?v=CZd9lpkVaA8&t=374s',
+        source: 'ToKCast by Brett Hall',
+        description: 'Part 2'
       },
     ],
   },
